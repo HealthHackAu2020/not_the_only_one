@@ -27,7 +27,6 @@ nltk.download('punkt')
 ```
 
 WebApp
-  Deploy
   Mobile Apps
   Search function improve UI
   Sticky to top icon for card macro

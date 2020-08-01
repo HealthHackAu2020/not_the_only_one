@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "AfPZ0rd6CzQx7JwZmDyI3JiNk+dZx6ikNk9cb3hgqciRPbtOtekXeXyVh0jURMHDslOmlOojjR17A/5Zt4MuOA==",
+  "success": true,
+  "projectFilePath": "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne.iOS/NotTheOnlyOne.iOS.csproj",
+  "expectedPackageFiles": [
+    "/Users/tinker/.nuget/packages/xamarin.essentials/1.5.3.2/xamarin.essentials.1.5.3.2.nupkg.sha512",
+    "/Users/tinker/.nuget/packages/xamarin.forms/4.7.0.1239/xamarin.forms.4.7.0.1239.nupkg.sha512"
+  ],
+  "logs": []
+}

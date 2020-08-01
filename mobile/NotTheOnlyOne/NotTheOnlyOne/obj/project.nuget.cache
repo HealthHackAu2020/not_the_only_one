@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "uRGIn0LX2Sngb1DkUi1zJzAKcPy/+d/sl6MRbl/5o4fzXFJzPfnLcMwVkAmm1aR1jiz1zoJRTNckDAG2cTaNRA==",
+  "success": true,
+  "projectFilePath": "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne/NotTheOnlyOne.csproj",
+  "expectedPackageFiles": [
+    "/Users/tinker/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512",
+    "/Users/tinker/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/tinker/.nuget/packages/xamarin.essentials/1.5.3.2/xamarin.essentials.1.5.3.2.nupkg.sha512",
+    "/Users/tinker/.nuget/packages/xamarin.forms/4.7.0.1239/xamarin.forms.4.7.0.1239.nupkg.sha512"
+  ],
+  "logs": []
+}

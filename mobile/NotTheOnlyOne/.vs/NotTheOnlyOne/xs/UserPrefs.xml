@@ -1,0 +1,35 @@
+﻿<Properties StartupConfiguration="{29D7849F-09D1-45CD-A2B1-29CC3A1830EE}|Default">
+  <MonoDevelop.Ide.ItemProperties.NotTheOnlyOne.iOS automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.8b6521ccc8128dc030f84d89a3efae24016c6cc7" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="NotTheOnlyOne/MainPage.xaml.cs">
+    <Files>
+      <File FileName="NotTheOnlyOne/MainPage.xaml.cs" Line="27" Column="18" />
+      <File FileName="NotTheOnlyOne/MainPage.xaml" Line="4" Column="114" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="NotTheOnlyOne" expanded="True">
+            <Node name="NotTheOnlyOne" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="MainPage.xaml" expanded="True" />
+            </Node>
+            <Node name="NotTheOnlyOne.Android" expanded="True" selected="True">
+              <Node name="Assets" expanded="True" />
+              <Node name="Resources" expanded="True" />
+            </Node>
+            <Node name="NotTheOnlyOne.iOS" expanded="True">
+              <Node name="Resources" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.NotTheOnlyOne.Android FirstBuild="True" PreferredExecutionTarget="Android.nexus_7_oreo_8_0_-_api_26" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -93,6 +93,6 @@ class EditUserForm(InviteUserForm):
 
   def validate_email(self, field):
     if User.query.filter_by(email=field.data).first():
-      if User.query.filter_by(email=field.data).first().id != int(self.uid.data):
+      if User.query.filter_by(email=field.data).first().id != int(self.id.data):
         raise ValidationError('Email already registered.')
 

@@ -1,0 +1,170 @@
+{% import 'macros/nav_macros.html' as nav %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  {% include 'partials/_head.html' %}
+  {# Any templates that extend this template can set custom_head_tags to add scripts to their page #}
+  {% block custom_head_tags %}{% endblock %}
+</head>
+
+<body id="example" class="index" ontouchstart="">
+  <div id="loginDialog" class="ui tiny transition modal"></div>
+  <div id="registerDialog" class="ui tiny transition modal"></div>
+  <div id="viewDialog" class="ui transition modal"></div>
+  <div class="pusher">
+    <div class="full height">
+      <div class="following bar {% if request.endpoint != 'main.index' %}light fixed{% endif %}">
+        <div class="ui container">
+          {% block nav %}
+          {{ nav.render_nav(current_user) }}
+          {% endblock %}
+        </div>
+      </div>
+
+      {# {% include 'partials/_flashes.html' %} #}
+      {# When extended, the content block contains all the html of the webpage #}
+
+      {% if request.endpoint != 'main.index' %}
+      <div class="ui vertical stripe segment">
+        <div class="ui stackable very relaxed center aligned grid container ntoo-top">
+          <div class="row">
+            <div class="twelve wide column">
+              {% endif %}
+              {% block content %}
+              {% endblock %}
+              {% if request.endpoint != 'main.index' %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {# Implement CSRF protection for site #}
+      {% if csrf_token()|safe %}
+      <div style="visibility: hidden; display: none">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token()|safe }}">
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {# login modal code #}
+  <script>
+    $(document).ready(function () {
+
+      function process_submit_login(event, url) {
+        event.preventDefault();
+        $.post(url, data = $('#loginForm').serialize(), function (data) {
+          if (data.status == 'ok') {
+            $('#loginDialog').modal('hide');
+            location.reload();
+          } else {
+            $('#loginDialog').html(data);
+            $('#submitLogin').click(function (event) {
+              process_submit_login(event, url);
+            })
+          }
+        });
+      }
+
+      $('.loginButton').click(function (event) {
+        event.preventDefault();
+        var url = "{{ url_for('account.login') }}";
+        $.get(url, function (data) {
+          $('#loginDialog').html(data);
+          $('#loginDialog').modal({
+            onApprove: function () {
+              return false; //Return false as to not close modal dialog
+            }
+          }).modal('show');
+
+          $('#submitLogin').click(function (event) {
+            process_submit_login(event, url);
+          })
+        });
+      });
+
+    });
+  </script>
+
+  {# register modal code #}
+  <script>
+    $(document).ready(function () {
+
+      function process_submit_register(event, url) {
+        event.preventDefault();
+        $.post(url, data = $('#registerForm').serialize(), function (data) {
+          if (data.status == 'ok') {
+            $('#registerDialog').modal('hide');
+            location.reload();
+          } else {
+            $('#registerDialog').html(data);
+            $('#submitRegister').click(function (event) {
+              process_submit_register(event, url);
+            })
+          }
+        });
+      }
+
+      $('.registerButton').click(function (event) {
+        event.preventDefault();
+        var url = "{{ url_for('account.register') }}";
+        $.get(url, function (data) {
+          $('#registerDialog').html(data);
+          $('#registerDialog').modal({
+            onApprove: function () {
+              return false; //Return false as to not close modal dialog
+            }
+          }).modal('show');
+
+          $('#submitRegister').click(function (event) {
+            process_submit_register(event, url);
+          })
+        });
+      });
+
+    });
+  </script>
+
+  {# site-wide story view modal handling #}
+  <script>
+  var view_running = false;
+  $('.storycard').click(function (event) {
+    event.preventDefault();
+    if (view_running == true) {
+      return;
+    }      
+    view_running = true;
+    var url = "{{ url_for('main.view',) }}" + "?id=" + $(this).data('id');
+    $.get(url, function (data) {
+      $('#viewDialog').html(data);
+      twttr.widgets.load($('#viewDialog'));
+      $('#viewDialog').css("display", "block");
+      $('#viewDialog').css("opacity", "0");
+      $('div.ui.dimmer.modals.page.transition.hidden').css("display", "block");
+
+      twttr.events.bind('rendered',  function(event) {
+        view_running = false;
+        $('#viewDialog').css("opacity", "100");
+        $('#viewDialog').modal({
+          onHidden: function(){
+            $('#viewDialog').css("display", "hidden");
+            $('div.ui.dimmer.modals.page.transition.hidden').css("display", "hidden");
+          }
+        }).modal('show');
+      });
+    });
+  });
+</script>
+
+
+{# fomantic-ize dropdowns #}
+<script>
+  $(document).ready(function() {
+    $('.ui.dropdown').dropdown({fullTextSearch: true});
+  });
+  </script>
+</body>
+
+</html>

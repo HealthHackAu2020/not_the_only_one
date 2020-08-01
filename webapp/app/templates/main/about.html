@@ -1,0 +1,10 @@
+{% import 'macros/page_macros.html' as page %}
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+    <h1 class="ui header shirou-primary">About</h1>
+    {{ page.render_inline_editor(editable_html_obj, current_user) }}
+    
+    <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+{% endblock %}
+

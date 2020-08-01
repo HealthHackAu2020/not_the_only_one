@@ -1,0 +1,48 @@
+{% extends 'layouts/base.html' %}
+
+{% macro dashboard_option(title, endpoint, description=None, icon=None) %}
+    <a class="column" href="{{ url_for(endpoint) }}">
+        <div class="ui padded segment">
+            <h3 class="ui header">
+                {% if icon is not none %}
+                    <i class="{{ icon }}"></i>
+                {% endif %}
+                <div class="content michiru-primary">
+                    {{ title }}
+                    {% if description is not none %}
+                        <div class="sub header michiru-primary">
+                            {{ description }}
+                        </div>
+                    {% endif %}
+                </div>
+            </h3>
+        </div>
+    </a>
+{% endmacro %}
+
+{% block content %}
+    <h1 class="ui header shirou-primary">Admin Dashboard</h1>
+
+    <div class="ui two column stackable grid">
+        {{ dashboard_option('Manage Users', 'admin.manage_users',
+                            description='View and manage user accounts', icon='users icon') }}
+        {{ dashboard_option('Manage Groups', 'admin.manage_groups',
+                            description='View and manage user groups', icon='calendar icon') }}
+        {{ dashboard_option('Manage Stories', 'admin.manage_stories',
+                            description='View and manage stories', icon='book icon') }}
+        {{ dashboard_option('Manage Categories', 'admin.manage_categories',
+                            description='View and manage story categories', icon='hashtag icon') }}
+        {{ dashboard_option('Manage Collections', 'admin.manage_collections',
+                            description='View and manage story collections', icon='list icon') }}
+        {{ dashboard_option('Add New User', 'admin.new_user',
+                            description='Create a new user account', icon='add user icon') }}
+        {{ dashboard_option('Invite New User', 'admin.invite_user',
+                            description='Invites a new user to create their own account', icon='add user icon') }}
+        {{ dashboard_option('Add New Group', 'admin.new_group',
+                            description="Create a new user group", icon='calendar plus icon') }}
+        {{ dashboard_option('Add Category', 'admin.new_category',
+                            description='Create a new story category', icon='hashtag icon') }}
+        {{ dashboard_option('Download JSON', 'admin.download',
+                                    description="Last Updated: " ~ json_modified, icon='table icon') }}
+    </div>
+{% endblock %}

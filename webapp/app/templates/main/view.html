@@ -1,0 +1,14 @@
+<i class="close icon"></i>
+<div class="ui header">
+    {{ title }}
+</div>
+
+
+<div class="content">
+  {{ oembed | safe }}
+  <br />
+  <div class="actions">
+    {% block footer %}
+    {% endblock %}
+  </div>
+</div>

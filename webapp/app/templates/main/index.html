@@ -1,0 +1,80 @@
+{% import 'macros/page_macros.html' as page %}
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="bg{{ range(1,3) | random }} masthead segment">
+  <div class="ui container">
+    <div class="introduction">
+      <h1 class="ui inverted header shirou-secondary">
+        <span class="library">
+          #NotTheOnlyOne
+        </span>
+        <span class="tagline shirou-secondary">
+          A HealthHack 2020 Project
+        </span>
+      </h1>
+      <div class="ui hidden divider"></div>
+
+      {# <div class="item">
+        <a class="twitter-follow-button twitter" href="https://twitter.com/NTOO_Org" data-show-count="false">
+          Follow
+        </a>
+        <a class="twitter-share-button twitter"
+          href="http://twitter.com/share"
+          data-text="#NotTheOnlyOne"
+          data-url="https://test.nottheonlyone.org/"
+          data-via="NTOO_Org">
+        </a>
+        <script type="text/javascript">
+        window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+        </script>
+      </div> #}
+
+
+      <a id="shareButton" href="#" class="ui huge inverted download button">
+        Share Your Story
+      </a>
+      <br />
+      <br />
+      <div class="ui statistic white">
+        <div class="value">
+          {{ num | commafy }}
+        </div>
+        <div class="label">
+          Shared
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui vertical stripe intro segment">
+  <div class="ui stackable very relaxed center aligned grid container">
+    <div class="row">
+      <div class="twelve wide column">
+        <h1 class="ui header shirou-primary"><strong>Explore Stories</strong></h1>
+        {# <div class="ui search">
+      <div class="ui huge icon input">
+        <input class="prompt" type="text" placeholder="Search">
+        <i class="search icon"></i>
+      </div>
+    </div> #}
+        <div class="ui three stackable cards solid">
+          {% for story in stories %}
+          <a class="ui centered card storycard" data-id="{{ story.id }}" data-tid="{{ story.twitter_id }}" href="#">
+            <div class="content michiru-primary">
+              <i class="quote left icon michiru-secondary"></i>{{ story.story_text | safe }} <i
+                class="quote right icon michiru-secondary"></i>
+            </div>
+            {# <div class="extra content">
+                </div> #}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

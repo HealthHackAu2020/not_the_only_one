@@ -10,9 +10,12 @@
 </head>
 
 <body id="example" class="index" ontouchstart="">
+
   <div id="loginDialog" class="ui tiny transition modal"></div>
   <div id="registerDialog" class="ui tiny transition modal"></div>
   <div id="viewDialog" class="ui transition modal"></div>
+  <div id="searchDialog" class="ui small transition modal"></div>
+
   <div class="pusher">
     <div class="full height">
       <div class="following bar {% if request.endpoint != 'main.index' %}light fixed{% endif %}">
@@ -79,6 +82,16 @@
             }
           }).modal('show');
 
+          var loginForm = document.getElementById('loginForm');
+          loginForm.addEventListener('keypress',function(event){
+            if (event.keyCode == 13) { 
+              process_submit_login(event, url);
+              return false; } 
+            else {
+              return true;
+            }
+          });
+
           $('#submitLogin').click(function (event) {
             process_submit_login(event, url);
           })
@@ -117,6 +130,16 @@
               return false; //Return false as to not close modal dialog
             }
           }).modal('show');
+
+          var registerForm = document.getElementById('registerForm');
+          registerForm.addEventListener('keypress',function(event){
+            if (event.keyCode == 13) { 
+              process_submit_register(event, url);
+              return false; } 
+            else {
+              return true;
+            }
+          });
 
           $('#submitRegister').click(function (event) {
             process_submit_register(event, url);
@@ -158,13 +181,62 @@
   });
 </script>
 
+  {# site-wide story search modal handling #}
+  <script>
+    $(document).ready(function () {
+
+      function process_submit_search(event, url) {
+        event.preventDefault();
+        $.post(url, data = $('#searchForm').serialize(), function (data) {
+          if (data.status == 'ok') {
+            window.location.href = data.url;
+            $('#searchDialog').modal('hide');
+          } else {
+            $('#searchDialog').html(data);
+            $('#submitSearch').click(function (event) {
+              process_submit_search(event, url);
+            })
+          }
+        });
+      }
+
+      $('.searchButton').click(function (event) {
+        event.preventDefault();
+        var url = "{{ url_for('main.search') }}";
+        $.get(url, function (data) {
+          $('#searchDialog').html(data);
+          $('#searchDialog').modal({
+            onApprove: function () {
+              return false; //Return false as to not close modal dialog
+            }
+          }).modal('show');
+
+          var searchForm = document.getElementById('searchForm');
+          searchForm.addEventListener('keypress',function(event){
+            if (event.keyCode == 13) { 
+              process_submit_search(event, url);
+              return false; } 
+            else {
+              return true;
+            }
+          });
+
+          $('#submitSearch').click(function (event) {
+            process_submit_search(event, url);
+          })
+        });
+      });
+
+    });
+  </script>
+
 
 {# fomantic-ize dropdowns #}
-<script>
+{# <script>
   $(document).ready(function() {
     $('.ui.dropdown').dropdown({fullTextSearch: true});
   });
-  </script>
+  </script> #}
 </body>
 
 </html>

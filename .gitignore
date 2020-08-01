@@ -16,3 +16,4 @@ config.py
 *.sock
 twitter_keys_fullarchive.yaml
 fullTweetsData.json
+mobile/

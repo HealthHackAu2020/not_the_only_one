@@ -1,0 +1,76 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+    <div class="ui stackable grid container">
+        <div class="sixteen wide tablet twelve wide computer centered column">
+            <h2 class="ui header">
+                Review Stories
+                <div class="sub header">
+                    Review uncurated stories.
+                </div>
+            </h2>
+            {# <div>
+                {{ f.render_multi_form(form, multi="four") }}
+            </div> #}
+
+            {# Use overflow-x: scroll so that mobile views don't freak out
+             # when the table is too wide #}
+            <div style="overflow-x: scroll;">
+                <table class="ui sortable unstackable selectable celled table">
+                    <thead>
+                        <tr class="header_tr">
+                            <th>Text</th>
+                            <th>Categories</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for story in stories %}
+                        <tr onclick="window.location.href = '{{ url_for('admin.review_story', story_id=story.id) }}';">
+                            <td class="">{{ story.story_text }}</td>
+                            <td class="">{{ story.categories }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {# <script type="text/javascript">
+        $(document).ready(function () {
+
+            function filter_stories() {
+                var resolved_selection = $('#resolved').dropdown('get text');
+                var assigned_selection = $('#assigned').dropdown('get text');
+
+                var rows = $("table").find("tr");
+                rows.hide();
+                rows.filter(function () {
+                    if ($(this).hasClass("header_tr")) {
+                        return true;
+                    }
+
+                    var ret = true;
+                    if (!$(this).hasClass(resolved_selection+"_tr")) {
+                        ret = false;
+                    }
+                    if (assigned_selection != '' && $(this).find('.assigned_td').text().indexOf(assigned_selection) <= -1) {
+                        ret = false;
+                    }
+
+                    return ret;
+                }).show()
+            }
+
+            filter_stories();
+
+            $('#resolved').change(function() {
+                filter_stories();
+            });
+
+            $('#assigned').change(function() {
+                filter_stories();
+            });
+        });
+    </script> #}
+{% endblock %}

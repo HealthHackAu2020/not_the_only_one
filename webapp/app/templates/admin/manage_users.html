@@ -11,21 +11,9 @@
             </h2>
 
             <div class="ui menu">
-                <div id="select-role" class="ui dropdown item">
-                    <div class="text">
-                        All account types
-                    </div>
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                        <div class="item" data-value="">All account types</div>
-                        {% for r in roles %}
-                            <div class="item" data-value="{{ r.name }}">{{ r.name }}s</div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="ui right search item">
+                <div class="ui search item">
                     <div class="ui transparent icon input">
-                        <input id="search-users" type="text" placeholder="Search users…">
+                        <input id="search-users" type="text" placeholder="Search categories…">
                         <i class="search icon"></i>
                     </div>
                 </div>
@@ -63,6 +51,7 @@
         $(document).ready(function () {
             $('#search-users').keyup(function () {
                 var searchText = $(this).val();
+                console.log("boop" + searchText);
                 if (searchText.length > 0) {
                     $('tbody td:icontains(' + searchText + ')').addClass('positive');
                     $('td.positive').not(':icontains(' + searchText + ')').removeClass('positive');
@@ -74,12 +63,6 @@
                 }
             });
 
-            $('#select-role').dropdown({
-                onChange: function (value, text, $selectedItem) {
-                    $('td.user.role:contains(' + value + ')').closest('tr').removeClass('hidden').show();
-                    $('td.user.role').not(':contains(' + value + ')').closest('tr').addClass('hidden').hide();
-                }
-            });
         });
     </script>
 {% endblock %}

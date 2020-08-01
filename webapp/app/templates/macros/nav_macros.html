@@ -4,7 +4,7 @@
 
 {% macro render_menu_items(endpoints) %}
     {% for endpoint, name, icon in endpoints %}
-        <a class="item view-ui {% if endpoint == 'account.login' %}loginButton{% endif %} {% if endpoint == 'account.register' %}registerButton{% endif %} {% if request.endpoint == endpoint %}active{% endif %}" href="{{ url_for(endpoint) }}">
+        <a class="item view-ui {% if endpoint == 'main.search' %}searchButton{% endif %} {% if endpoint == 'account.login' %}loginButton{% endif %} {% if endpoint == 'account.register' %}registerButton{% endif %} {% if request.endpoint == endpoint %}active{% endif %}" href="{{ url_for(endpoint) }}">
             {% if icon %}
                 <i class="{{ icon }} icon"></i>
             {% endif %}

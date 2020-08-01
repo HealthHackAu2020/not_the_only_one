@@ -1,0 +1,12 @@
+{% macro render_three_cards(cards) %}
+    {% for card in cards %}
+    <a class="ui centered card storycard" data-id="{{ card.id }}" data-tid="{{ card.twitter_id }}" href="#">
+    <div class="content michiru-primary">
+        <i class="quote left icon michiru-secondary"></i>{{ card.story_text | safe }} <i
+        class="quote right icon michiru-secondary"></i>
+    </div>
+    {# <div class="extra content">
+        </div> #}
+    </a>
+    {% endfor %}
+{% endmacro %}

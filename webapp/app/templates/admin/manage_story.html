@@ -1,0 +1,98 @@
+{% extends 'layouts/base.html' %}
+{% import 'macros/form_macros.html' as f %}
+
+{% set deletion_endpoint = 'admin.delete_story_request' %}
+
+{% set endpoints = [
+    ('admin.story_info', 'Story information'),
+    ('admin.change_story', 'Edit story'),
+    (deletion_endpoint, 'Delete story')
+] %}
+
+{% macro navigation(items) %}
+    <div class="ui vertical fluid secondary menu">
+        {% for route, name in items %}
+            {% set href = url_for(route, story_id=story.id) %}
+            <a class="item {% if request.endpoint == route %}active{% endif %}" href="{{ href }}">
+                {{ name }}
+            </a>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro story_info(story) %}
+    <table class="ui compact definition table">
+        <tr><td>ID</td><td>{{ story.id }}</td></tr>
+        <tr><td>Text</td><td>{{ story.text }}</td></tr>
+        <tr><td>Re-Text</td><td>{{ story.retweet_text }}</td></tr>
+        <tr><td>Quote-Text</td><td>{{ story.quote_text }}</td></tr>
+        <tr><td>Story Text</td><td>{{ story.text }}</td></tr>
+
+        <tr><td>Feature Set</td><td>{{ story.feature_set }}</td></tr>
+        <tr><td>Media</td><td>{{ story.media }}</td></tr>
+        <tr><td>Commented</td><td>{{ story.comment }}</td></tr>
+        <tr><td>Thread</td><td>{{ story.thread }}</td></tr>
+        <tr><td>Visible</td><td>{{ story.visible }}</td></tr>
+        <tr><td>Origin</td><td>{{ story.origin }}</td></tr>
+        <tr><td>Curated</td><td>{{ story.curated }}</td></tr>
+
+        <tr><td>Categories</td><td>{{ story.categories|join(', ') }}</td></tr>
+    </table>
+{% endmacro %}
+
+{% block content %}
+    <div class="ui stackable centered grid container">
+        <div class="twelve wide column">
+            <h2 class="ui header shirou-primary">
+                {{ story.name }}
+                <div class="sub header">View and manage story {{ story.id }}.</div>
+            </h2>
+        </div>
+        <div class="stretched divided very relaxed row">
+            <div class="four wide column">
+                {{ navigation(endpoints) }}
+            </div>
+            <div class="eight wide column">
+                {% if request.endpoint == deletion_endpoint %}
+                    <h3 class="ui red block header">
+                        <i class="warning circle icon"></i>
+                        <div class="content">
+                            This action is permanent
+                            <div class="sub header">
+                                Deleting a story is not a reversible change and cannot be recovered.
+                            </div>
+                        </div>
+                    </h3>
+
+                    <div class="ui form">
+                        <div class="inline field">
+                            <div class="ui deletion checkbox">
+                                <input type="checkbox" tabindex="0" class="hidden">
+                                <label>I understand that this action cannot be undone.</label>
+                            </div>
+                        </div>
+                        <a class="ui disabled negative deletion button">
+                            Delete this story
+                        </a>
+                    </div>
+                    </div>
+                {% elif form %}
+                    {{ f.render_form(form) }}
+                {% else %}
+                    {{ story_info(story) }}
+                    {{ story.oembed_full | safe }}
+                {% endif %}
+            </div>
+
+    <script type="text/javascript">
+        $('.deletion.checkbox').checkbox({
+            onChecked: function() {
+                $('.deletion.button').removeClass('disabled')
+                        .attr('href', '{{ url_for('admin.delete_story', story_id=story.id) }}');
+            },
+            onUnchecked: function() {
+                $('.deletion.button').addClass('disabled').removeAttr('href');
+            }
+        });
+    </script>
+{% endblock %}

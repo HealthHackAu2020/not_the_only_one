@@ -32,10 +32,14 @@ class EditCategoryForm(NewCategoryForm):
 
 
 class EditStoryForm(FlaskForm):
-  thread = QuerySelectField("Allow collection to be seen by others?", allow_blank=True, query_factory=lambda: LookupValue.query.filter_by(group='bool'))
+  thread = QuerySelectField("Story is part of a thread?", allow_blank=True, query_factory=lambda: LookupValue.query.filter_by(group='bool'))
   visible = QuerySelectField("Allow collection to be seen by others?", allow_blank=True, query_factory=lambda: LookupValue.query.filter_by(group='bool'))
   categories = QuerySelectMultipleField('Categories', query_factory=lambda: db.session.query(Category).order_by('id'))
   submit = SubmitField('Update')
+
+
+class ReviewStoryForm(EditStoryForm):
+  submit = SubmitField('Review')
 
 
 class NewGroupForm(FlaskForm):

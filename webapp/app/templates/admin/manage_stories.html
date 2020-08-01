@@ -1,13 +1,17 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-
-
-
-<h2 class="ui header">{{ title }}</h2>
-            <div>
+    <div class="ui stackable grid container">
+        <div class="sixteen wide tablet twelve wide computer centered column">
+            <h2 class="ui header">
+                Manage Stories
+                <div class="sub header">
+                    View and manage stories.
+                </div>
+            </h2>
+            {# <div>
                 {{ f.render_multi_form(form, multi="four") }}
-            </div>
+            </div> #}
 
             {# Use overflow-x: scroll so that mobile views don't freak out
              # when the table is too wide #}
@@ -15,21 +19,19 @@
                 <table class="ui sortable unstackable selectable celled table">
                     <thead>
                         <tr class="header_tr">
-                            <th>Date (AEST)</th>
-                            <th>Participant</th>
-                            <th>Reason</th>
-                            <th>Status</th>
-                            <th>Assigned</th>
+                            <th>Text</th>
+                            <th>Categories</th>
+                            <th>Visible</th>
+                            <th>Curated</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for story in stories %}
-                        <tr class="{{ story['resolved'] }}_tr" onclick="window.location.href = '{{ url_for('admin.manage_story', self_report_id=outlier.outlier_report.id) }}';">
-                            <td class="date_td">{{ outlier['adjusted_date'] }}</td>
-                            <td class="">{{ outlier['rank_name'] }}</td>
-                            <td class="">{{ outlier['why_outlier'] }}</td>
-                            <td class="">{{ outlier['status'] }}</td>
-                            <td class="assigned_td">{{ outlier['assigned'] }}</td>
+                        <tr onclick="window.location.href = '{{ url_for('admin.story_info', story_id=story.id) }}';">
+                            <td class="">{{ story.story_text }}</td>
+                            <td class="">{{ story.categories }}</td>
+                            <td class="">{{ story.visible }}</td>
+                            <td class="">{{ story.curated }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -38,7 +40,7 @@
         </div>
     </div>
 
-    <script type="text/javascript">
+    {# <script type="text/javascript">
         $(document).ready(function () {
 
             function filter_stories() {
@@ -74,4 +76,5 @@
                 filter_stories();
             });
         });
-    </script>
+    </script> #}
+{% endblock %}

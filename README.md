@@ -27,31 +27,18 @@ nltk.download('punkt')
 ```
 
 WebApp
-  Manage stories
-  Manage categories
   Deploy
-    Rowland to start classifying
-  Remaining UI
-  Main
-    Infinite scrolling
-    Search function
-    Modals
-      Share
-  Similarity function
-    Share Story/Collection to social media
+  Mobile Apps
+  Search function improve UI
+  Sticky to top icon for card macro
+  Bugs/Remaining UI
+  Infinite scrolling on homepage
+  Share Modal
+  DesktopApp
 
-  API endpoint for adding
-    Use for browser plugins e.g.
-    Extend Story model to include origin
+API endpoint for adding
+  Use for browser plugins e.g.
+  Extend Story model to include origin
 
-Machine Learning
-  Categories
-  Curation
-  Sentiment
-
-MobileApps
-  Need logo
-  Update UI where required
-
-DesktopApp
-  Last
+Similarity function
+  Share Story/Collection to social media

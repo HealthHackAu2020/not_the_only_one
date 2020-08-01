@@ -20,6 +20,7 @@ from app.admin.forms import (
     NewCategoryForm,
     EditCategoryForm,
     EditStoryForm,
+    ReviewStoryForm
 )
 from app.account.forms import EditCollectionForm
 from app.decorators import admin_required
@@ -492,7 +493,8 @@ def delete_collection(collection_id):
 def review_stories():
     """Review new stories."""
     false_value = LookupValue.query.filter_by(group="bool",value="False").first()
-    stories = Story.query.filter_by(origin="remote").filter_by(curated=false_value).all()
+    # stories = Story.query.filter_by(origin="remote").filter_by(curated=false_value).all()
+    stories = Story.query.filter_by(curated=false_value).all()
     return render_template('admin/review_stories.html', stories=stories)
 
 
@@ -505,7 +507,7 @@ def review_story(story_id):
     story = Story.query.filter_by(id=story_id).first()
     if story is None:
         abort(404)
-    form = EditStoryForm(obj=story)
+    form = ReviewStoryForm(obj=story)
     if form.validate_on_submit():
         form.populate_obj(story)
         true_value = LookupValue.query.filter_by(group="bool",value="True").first()
@@ -514,7 +516,7 @@ def review_story(story_id):
         false_value = LookupValue.query.filter_by(group="bool",value="False").first()
         next_story = Story.query.filter_by(origin="remote").filter_by(curated=false_value).first()
         if next_story:
-            next_form = EditStoryForm(obj=next_story)
+            next_form = ReviewStoryForm(obj=next_story)
             return render_template('admin/review_story.html', story=next_story, form=next_form)
         else:        
             return redirect(url_for('admin.review_stories'))

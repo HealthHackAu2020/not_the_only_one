@@ -1,0 +1,85 @@
+{% extends 'layouts/base.html' %}
+{% import 'macros/form_macros.html' as f %}
+
+{% set deletion_endpoint = 'admin.delete_collection_request' %}
+
+{% set endpoints = [
+    ('admin.collection_info', 'collection information'),
+    ('admin.change_collection', 'Edit collection'),
+    (deletion_endpoint, 'Delete collection')
+] %}
+
+{% macro navigation(items) %}
+    <div class="ui vertical fluid secondary menu">
+        {% for route, name in items %}
+            {% set href = url_for(route, collection_id=collection.id) %}
+            <a class="item {% if request.endpoint == route %}active{% endif %}" href="{{ href }}">
+                {{ name }}
+            </a>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro collection_info(collection) %}
+    <table class="ui compact definition table">
+        <tr><td>Name</td><td>{{ collection.name }}</td></tr>
+        <tr><td>User</td><td>{{ collection.user|join(', ') }}</td></tr>
+        <tr><td>Stories</td><td>{{ collection.stories|join(', ') }}</td></tr>
+    </table>
+{% endmacro %}
+
+{% block content %}
+    <div class="ui stackable centered grid container">
+        <div class="twelve wide column">
+            <h2 class="ui header shirou-primary">
+                {{ collection.name }}
+                <div class="sub header">View and manage collection {{ collection.name }}.</div>
+            </h2>
+        </div>
+        <div class="stretched divided very relaxed row">
+            <div class="four wide column">
+                {{ navigation(endpoints) }}
+            </div>
+            <div class="eight wide column">
+                {% if request.endpoint == deletion_endpoint %}
+                    <h3 class="ui red block header">
+                        <i class="warning circle icon"></i>
+                        <div class="content">
+                            This action is permanent
+                            <div class="sub header">
+                                Deleting a story collection is not a reversible change and cannot be recovered.
+                            </div>
+                        </div>
+                    </h3>
+
+                    <div class="ui form">
+                        <div class="inline field">
+                            <div class="ui deletion checkbox">
+                                <input type="checkbox" tabindex="0" class="hidden">
+                                <label>I understand that this action cannot be undone.</label>
+                            </div>
+                        </div>
+                        <a class="ui disabled negative deletion button">
+                            Delete this collection
+                        </a>
+                    </div>
+                    </div>
+                {% elif form %}
+                    {{ f.render_form(form) }}
+                {% else %}
+                    {{ collection_info(collection) }}
+                {% endif %}
+            </div>
+
+    <script type="text/javascript">
+        $('.deletion.checkbox').checkbox({
+            onChecked: function() {
+                $('.deletion.button').removeClass('disabled')
+                        .attr('href', '{{ url_for('admin.delete_collection', collection_id=collection.id) }}');
+            },
+            onUnchecked: function() {
+                $('.deletion.button').addClass('disabled').removeAttr('href');
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, jsonify, request
-from flask_login import login_required
+from flask import Blueprint, render_template, jsonify, request, redirect, url_for
 
 from app.models import EditableHTML, Story, LookupValue
+from app.main.forms import SearchForm
 from sqlalchemy import func
 
 main = Blueprint('main', __name__)
@@ -21,10 +21,27 @@ def about():
     return render_template(
         'main/about.html', editable_html_obj=editable_html_obj)
 
-@main.route('/search')
+
+@main.route('/search/<terms>')
+def search_list(terms):
+    hits = []
+    true_value = LookupValue.query.filter_by(group="bool",value="True").first()
+    for term in terms.split():
+        keyword = "%{}%".format(term)
+        keyword = keyword.lower()
+        stories_query = Story.query.filter(Story.feature_set.like(keyword)).all()
+        for story in stories_query:
+            if story not in hits:
+                hits.append(story)
+    return render_template('main/list.html', stories=hits, terms=terms, hits=len(hits))
+
+
+@main.route('/search', methods=['GET', 'POST'])
 def search():
-    # TODO get modal and post results/key
-    return
+    form = SearchForm()
+    if form.validate_on_submit():
+        return jsonify(status='ok', url=url_for('main.search_list', terms=form.terms.data))
+    return render_template('main/search.html', form=form, title="Search Stories")
 
 
 @main.route('/view')

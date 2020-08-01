@@ -1,0 +1,23 @@
+{% import 'macros/card_macros.html' as card %}
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class="ui vertical stripe intro segment">
+  <div class="ui stackable very relaxed center aligned grid container">
+    <div class="row">
+      <div class="twelve wide column">
+        <h1 class="ui header shirou-primary"><strong>Search Stories</strong>
+            <div class="sub header">terms: {{ terms }}</div>
+            <div class="sub header">hits: {{ hits }}</div>
+        </h1>
+        
+        <div class="ui three stackable cards solid">
+            {{ card.render_three_cards(stories) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

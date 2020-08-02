@@ -87,8 +87,9 @@ def category(category_id):
     if category is None:
         return jsonify("Bad ID")
     
+    share_url = BASE + url_for("main.category", category_id=category_id)
     stories = []
     for story in category.stories:
         if story.visible == true_value:
             stories.append(story)
-    return render_template('main/list.html', title=category.name, stories=stories, hits=len(stories))
+    return render_template('main/list.html', share_url=share_url, title=category.name, stories=stories, hits=len(stories))

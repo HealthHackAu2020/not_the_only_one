@@ -7,16 +7,45 @@
   <div class="ui stackable very relaxed center aligned grid container">
     <div class="row">
       <div class="twelve wide column">
-        <br/>
+        <br />
+
         <h1 class="ui header shirou-primary"><strong>{{ title }}</strong>
           {% if terms is defined %}
-            <div class="sub header">terms: {{ terms }}</div>
+          <div class="sub header">terms: {{ terms }}</div>
           {% endif %}
-            <div class="sub header">hits: {{ hits }}</div>
+          <div class="sub header">hits: {{ hits }}</div>
         </h1>
-        
+
+
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}">
+          <div class="ui circular icon facebook button"><i class="facebook icon"></i></div>
+        </a>
+
+        <a target="_blank" href="https://twitter.com/home?status={{ share_url }}">
+          <div class="ui circular icon  twitter button">
+            <i class="twitter icon"></i>
+
+          </div>
+        </a>
+
+        <a target="_blank"
+          href="https://www.linkedin.com/shareArticle?mini=true&url={{ share_url }}&title=&summary=#NotTheOnlyOne&source=">
+          <div class="ui circular icon  linkedin button">
+            <i class="linkedin icon"></i>
+
+          </div>
+        </a>
+
+        <a target="_blank"
+          href="mailto:info@example.com?&cc=&bcc=&subject=#NotTheOnlyOne Project&body=I'd like to share this story with you: {{ share_url }}">
+          <div class="ui circular icon  instagram button">
+            <i class="envelope icon"></i>
+
+          </div>
+        </a>
+
         <div class="ui three stackable cards solid">
-            {{ card.render_three_cards(stories) }}
+          {{ card.render_three_cards(stories) }}
         </div>
       </div>
     </div>

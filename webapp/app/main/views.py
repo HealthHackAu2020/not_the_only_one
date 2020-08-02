@@ -4,6 +4,7 @@ from flask import json
 from app.models import EditableHTML, Story, LookupValue, Category
 from app.main.forms import SearchForm
 from sqlalchemy import func
+from random import shuffle
 
 main = Blueprint('main', __name__)
 
@@ -11,17 +12,24 @@ BASE="https://test.nottheonlyone.org"
 
 @main.route('/')
 def index():
-    true_value = LookupValue.query.filter_by(group="bool",value="True").first()
-    stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
-    stories = stories_query.all()
+    front_page = Category.query.filter_by(name="Front Page").first()
+    if front_page is None:
+        true_value = LookupValue.query.filter_by(group="bool",value="True").first()
+        stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
+        stories = stories_query.all()
+        stories = stories[:18]
+    else:
+        stories = front_page.stories
+        shuffle(stories)
     categories = []
     story_categories = Category.query.all()
     for cat in story_categories:
-        category = {}
-        category['url'] = url_for("main.category", category_id=cat.id)
-        category['name'] = '#' + cat.name.replace(' ', '')
-        categories.append(category)
-    return render_template('main/index.html', stories=stories[:18], num=len(stories), categories=categories)
+        if cat.name != "Front Page":
+            category = {}
+            category['url'] = url_for("main.category", category_id=cat.id)
+            category['name'] = '#' + cat.name.replace(' ', '')
+            categories.append(category)
+    return render_template('main/index.html', stories=stories, num=len(stories), categories=categories)
 
 
 @main.route('/about')
@@ -67,18 +75,25 @@ def view():
 def story(story_id):
     true_value = LookupValue.query.filter_by(group="bool",value="True").first()
     story = Story.query.filter_by(id=story_id).filter_by(visible=true_value).first()
-    stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
-    stories = stories_query.all()
+    front_page = Category.query.filter_by(name="Front Page").first()
+    if front_page is None:
+        stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
+        stories = stories_query.all()
+        stories = stories[:18]
+    else:
+        stories = front_page.stories
+        shuffle(stories)
     categories = []
     story_categories = Category.query.all()
     for cat in story_categories:
-        category = {}
-        category['url'] = url_for("main.category", category_id=cat.id)
-        category['name'] = cat.name
-        categories.append(category)
+        if cat.name != "Front Page":
+            category = {}
+            category['url'] = url_for("main.category", category_id=cat.id)
+            category['name'] = '#' + cat.name.replace(' ', '')
+            categories.append(category)
     if story is None:
-        return render_template('main/index.html', stories=stories[:18], num=len(stories), categories=categories)
-    return render_template('main/index.html', stories=stories[:18], num=len(stories), load_id=story.id, categories=categories)
+        return render_template('main/index.html', stories=stories, num=len(stories), categories=categories)
+    return render_template('main/index.html', stories=stories, num=len(stories), load_id=story.id, categories=categories)
 
 
 @main.route('/category/<category_id>')

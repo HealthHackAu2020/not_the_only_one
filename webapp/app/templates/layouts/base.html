@@ -32,10 +32,12 @@
       {% if request.endpoint != 'main.index' %}
       {% if request.endpoint != 'main.story' %}
       {% if request.endpoint != 'main.search_list' %}
+      {% if request.endpoint != 'main.category' %}
       <div class="ui vertical stripe segment">
         <div class="ui stackable very relaxed center aligned grid container ntoo-top">
           <div class="row">
             <div class="twelve wide column">
+              {% endif %}
               {% endif %}
               {% endif %}
               {% endif %}
@@ -44,10 +46,12 @@
               {% if request.endpoint != 'main.index' %}
               {% if request.endpoint != 'main.story' %}
               {% if request.endpoint != 'main.search_list' %}
+              {% if request.endpoint != 'main.category' %}
             </div>
           </div>
         </div>
       </div>
+      {% endif %}
       {% endif %}
       {% endif %}
       {% endif %}

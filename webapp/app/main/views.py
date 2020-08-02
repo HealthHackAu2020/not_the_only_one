@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request, redirect, url_for
+from flask import json
 
-from app.models import EditableHTML, Story, LookupValue
+from app.models import EditableHTML, Story, LookupValue, Category
 from app.main.forms import SearchForm
 from sqlalchemy import func
 
@@ -13,7 +14,14 @@ def index():
     true_value = LookupValue.query.filter_by(group="bool",value="True").first()
     stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
     stories = stories_query.all()
-    return render_template('main/index.html', stories=stories[:18], num=len(stories))
+    categories = []
+    story_categories = Category.query.all()
+    for cat in story_categories:
+        category = {}
+        category['url'] = url_for("main.category", category_id=cat.id)
+        category['name'] = '#' + cat.name.replace(' ', '')
+        categories.append(category)
+    return render_template('main/index.html', stories=stories[:18], num=len(stories), categories=categories)
 
 
 @main.route('/about')
@@ -60,6 +68,27 @@ def story(story_id):
     story = Story.query.filter_by(id=story_id).filter_by(visible=true_value).first()
     stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
     stories = stories_query.all()
+    categories = []
+    story_categories = Category.query.all()
+    for cat in story_categories:
+        category = {}
+        category['url'] = url_for("main.category", category_id=cat.id)
+        category['name'] = cat.name
+        categories.append(category)
     if story is None:
-        return render_template('main/index.html', stories=stories[:18], num=len(stories))
-    return render_template('main/index.html', stories=stories[:18], num=len(stories), load_id=story.id)
+        return render_template('main/index.html', stories=stories[:18], num=len(stories), categories=categories)
+    return render_template('main/index.html', stories=stories[:18], num=len(stories), load_id=story.id, categories=categories)
+
+
+@main.route('/category/<category_id>')
+def category(category_id):
+    true_value = LookupValue.query.filter_by(group="bool",value="True").first()
+    category = Category.query.filter_by(id=category_id).first()
+    if category is None:
+        return jsonify("Bad ID")
+    
+    stories = []
+    for story in category.stories:
+        if story.visible == true_value:
+            stories.append(story)
+    return render_template('main/list.html', stories=stories, terms=category.name, hits=len(stories))

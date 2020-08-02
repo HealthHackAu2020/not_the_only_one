@@ -18,11 +18,3 @@ The ideal solution would have three areas: Capturing the data easily into a data
 
 * Andrew Saul
 * HealthHack Committee
-
-## TODO
-* Search function improve UI
-* Sticky to top icon for card macro
-* Bugs/Remaining UI
-* Infinite scrolling on homepage
-* Add favicon
-* Add logo to centre of mobile nav

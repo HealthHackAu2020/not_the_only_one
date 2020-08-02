@@ -75,11 +75,10 @@ def view():
     if story.categories is not None:
         if len(story.categories) > 0:
             for cat in story.categories:
-                if cat.name != FRONT_GROUP:
-                    category = {}
-                    category['url'] = url_for("main.category", category_id=cat.id)
-                    category['name'] = '#' + cat.name.replace(' ', '')
-                    categories.append(category)
+                category = {}
+                category['url'] = url_for("main.category", category_id=cat.id)
+                category['name'] = '#' + cat.name.replace(' ', '')
+                categories.append(category)
     return render_template('main/view.html', oembed=story.oembed_full, share_url=share_url, categories=categories)
 
 
@@ -100,11 +99,10 @@ def story(story_id):
     num = len(Story.query.all())
     curated = len(Story.query.filter_by(curated=true_value).all())
     for cat in story_categories:
-        if cat.name != FRONT_GROUP:
-            category = {}
-            category['url'] = url_for("main.category", category_id=cat.id)
-            category['name'] = '#' + cat.name.replace(' ', '')
-            categories.append(category)
+        category = {}
+        category['url'] = url_for("main.category", category_id=cat.id)
+        category['name'] = '#' + cat.name.replace(' ', '')
+        categories.append(category)
     if story is None:
         return render_template('main/index.html', stories=stories, num=num, curated=curated, categories=categories)
     return render_template('main/index.html', stories=stories, num=num, curated=curated, load_id=story.id, categories=categories)

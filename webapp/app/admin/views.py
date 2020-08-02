@@ -498,8 +498,8 @@ def review_stories():
     return render_template('admin/review_stories.html', stories=stories)
 
 
-@admin.route('/review/<int:story_id>')
-@admin.route('/review/<int:story_id>/info')
+@admin.route('/review/<int:story_id>', methods=['GET', 'POST'])
+@admin.route('/review/<int:story_id>/info', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def review_story(story_id):

@@ -23,13 +23,14 @@ def index():
         shuffle(stories)
     categories = []
     story_categories = Category.query.all()
+    num = len(Story.query.all())
     for cat in story_categories:
         if cat.name != "Front Page":
             category = {}
             category['url'] = url_for("main.category", category_id=cat.id)
             category['name'] = '#' + cat.name.replace(' ', '')
             categories.append(category)
-    return render_template('main/index.html', stories=stories, num=len(stories), categories=categories)
+    return render_template('main/index.html', stories=stories, num=num, categories=categories)
 
 
 @main.route('/about')
@@ -85,6 +86,7 @@ def story(story_id):
         shuffle(stories)
     categories = []
     story_categories = Category.query.all()
+    num = len(Story.query.all())
     for cat in story_categories:
         if cat.name != "Front Page":
             category = {}
@@ -93,7 +95,7 @@ def story(story_id):
             categories.append(category)
     if story is None:
         return render_template('main/index.html', stories=stories, num=len(stories), categories=categories)
-    return render_template('main/index.html', stories=stories, num=len(stories), load_id=story.id, categories=categories)
+    return render_template('main/index.html', stories=stories, num=num, load_id=story.id, categories=categories)
 
 
 @main.route('/category/<category_id>')

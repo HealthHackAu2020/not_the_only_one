@@ -41,7 +41,7 @@ def search_list(terms):
         for story in stories_query:
             if story not in hits:
                 hits.append(story)
-    return render_template('main/list.html', stories=hits, terms=terms, hits=len(hits))
+    return render_template('main/list.html', stories=hits, title="Search Stories", terms=terms, hits=len(hits))
 
 
 @main.route('/search', methods=['GET', 'POST'])
@@ -49,7 +49,7 @@ def search():
     form = SearchForm()
     if form.validate_on_submit():
         return jsonify(status='ok', url=url_for('main.search_list', terms=form.terms.data))
-    return render_template('main/search.html', form=form, title="Search Stories")
+    return render_template('main/search.html', title="Search Stories", form=form)
 
 
 @main.route('/view')
@@ -91,4 +91,4 @@ def category(category_id):
     for story in category.stories:
         if story.visible == true_value:
             stories.append(story)
-    return render_template('main/list.html', stories=stories, terms=category.name, hits=len(stories))
+    return render_template('main/list.html', title=category.name, stories=stories, hits=len(stories))

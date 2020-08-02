@@ -8,8 +8,10 @@
     <div class="row">
       <div class="twelve wide column">
         <br/>
-        <h1 class="ui header shirou-primary"><strong>Search Stories</strong>
+        <h1 class="ui header shirou-primary"><strong>{{ title }}</strong>
+          {% if terms is defined %}
             <div class="sub header">terms: {{ terms }}</div>
+          {% endif %}
             <div class="sub header">hits: {{ hits }}</div>
         </h1>
         

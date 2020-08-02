@@ -670,9 +670,14 @@ html {
   }
 }
 
+#mobileMenuBar {
+  display: none;
+}
+#mobileMenuSideBar {
+  display: none;
+}
 
-
-@media only screen and (max-width : 600px) {
+@media only screen and (max-width : 800px) {
   #example.index .solid,
   #example.index .stripe {
     padding: 4em 0em;
@@ -680,12 +685,18 @@ html {
   #example.index .masthead.segment h1 .text {
     margin-left: 0em;
   }
-  #example.index .following.bar {
+  #normalMenu {
     display: none;
   }
-  #example.index .masthead:before {
-    display: none;
+  #mobileMenuBar {
+    display: flex;
   }
+  #mobileMenuSideBar {
+    display: block;
+  }
+  /* #example.index .masthead:before {
+    display: none;
+  } */
   #example.index .following.bar .column {
     text-align: center;
   }
@@ -708,9 +719,9 @@ html {
   #example.index .email.stripe .input {
     width: 100%;
   }
-  #example.index .following .secondary.menu {
+  /* #example.index .following .secondary.menu {
     display: none;
-  }
+  } */
   #example.index .email.stripe .submit.button {
     margin-top: 0.5em;
   }

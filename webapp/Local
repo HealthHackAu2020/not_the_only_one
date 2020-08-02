@@ -1,3 +1,0 @@
-redis: redis-server --port 5379
-web: python -u manage.py runserver -p 5005
-worker: python -u manage.py run_worker

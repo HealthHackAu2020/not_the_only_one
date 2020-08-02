@@ -1,33 +1,39 @@
 {
   "format": 1,
   "restore": {
-    "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne.iOS/NotTheOnlyOne.iOS.csproj": {}
+    "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne.iOS\\NotTheOnlyOne.iOS.csproj": {}
   },
   "projects": {
-    "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne.iOS/NotTheOnlyOne.iOS.csproj": {
+    "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne.iOS\\NotTheOnlyOne.iOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne.iOS/NotTheOnlyOne.iOS.csproj",
+        "projectUniqueName": "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne.iOS\\NotTheOnlyOne.iOS.csproj",
         "projectName": "NotTheOnlyOne.iOS",
-        "projectPath": "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne.iOS/NotTheOnlyOne.iOS.csproj",
-        "packagesPath": "/Users/tinker/.nuget/packages/",
-        "outputPath": "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne.iOS/obj/",
+        "projectPath": "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne.iOS\\NotTheOnlyOne.iOS.csproj",
+        "packagesPath": "C:\\Users\\tinker\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne.iOS\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "/Users/tinker/.config/NuGet/NuGet.Config"
+          "C:\\Users\\tinker\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "xamarinios10"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "xamarinios10": {
             "projectReferences": {
-              "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne/NotTheOnlyOne.csproj": {
-                "projectPath": "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne/NotTheOnlyOne.csproj"
+              "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne\\NotTheOnlyOne.csproj": {
+                "projectPath": "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne\\NotTheOnlyOne.csproj"
               }
             }
           }
@@ -59,25 +65,28 @@
         }
       }
     },
-    "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne/NotTheOnlyOne.csproj": {
+    "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne\\NotTheOnlyOne.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne/NotTheOnlyOne.csproj",
+        "projectUniqueName": "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne\\NotTheOnlyOne.csproj",
         "projectName": "NotTheOnlyOne",
-        "projectPath": "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne/NotTheOnlyOne.csproj",
-        "packagesPath": "/Users/tinker/.nuget/packages/",
-        "outputPath": "/Users/tinker/Projects/not_the_only_one/mobile/NotTheOnlyOne/NotTheOnlyOne/obj/",
+        "projectPath": "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne\\NotTheOnlyOne.csproj",
+        "packagesPath": "C:\\Users\\tinker\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tinker\\Seafile\\Projects\\not_the_only_one\\mobile\\NotTheOnlyOne\\NotTheOnlyOne\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "/Users/tinker/.config/NuGet/NuGet.Config"
+          "C:\\Users\\tinker\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -119,7 +128,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

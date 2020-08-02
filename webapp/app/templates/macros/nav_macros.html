@@ -64,7 +64,17 @@
 {% endmacro %}
 
 {% macro render_nav(current_user, dropdown=[]) %}
-    <div class="ui large {% if request.endpoint == 'main.index' %}inverted{% endif %} secondary network menu">
+    <div id="normalMenu" class="ui large {% if request.endpoint == 'main.index' %}inverted{% endif %} secondary network menu" style="margin-top:0px !important;">
       {{ build_nav(current_user) }}
     </div>
+{% endmacro %}
+
+{% macro render_mobile_nav(current_user, dropdown=[]) %}
+    <div id="mobileMenuBar" class="ui top attached menu" style="margin-top:0px !important;">
+    <a class="item"><i class="sidebar icon"></i></a>
+    </div>
+    <div class="ui bottom attached segment pushable">
+      <div id="mobileMenuSideBar" class="ui inverted labeled icon left inline vertical sidebar menu michiru-primary">
+          {{ build_nav(current_user) }}
+      </div>
 {% endmacro %}

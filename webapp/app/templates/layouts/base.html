@@ -15,7 +15,7 @@
   <div id="registerDialog" class="ui tiny transition modal"></div>
   <div id="viewDialog" class="ui transition modal"></div>
   <div id="searchDialog" class="ui small transition modal"></div>
-
+  {{ nav.render_mobile_nav(current_user) }}
   <div class="pusher">
     <div class="full height">
       <div class="following bar {% if request.endpoint != 'main.index' %}light fixed{% endif %}">
@@ -51,6 +51,7 @@
       </div>
       {% endif %}
     </div>
+  </div>
   </div>
   {# login modal code #}
   <script>
@@ -228,6 +229,15 @@
       });
 
     });
+  </script>
+
+  <script>
+  $('#mobileMenuSideBar')
+  .sidebar({
+    context: $('#example.index .bottom.segment')
+  })
+  .sidebar('attach events', '#mobileMenuBar .item')
+;
   </script>
 
 

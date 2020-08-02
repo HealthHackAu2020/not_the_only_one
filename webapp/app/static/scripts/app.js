@@ -1,6 +1,6 @@
 // base
 // Semantic UI breakpoints
-var mobileBreakpoint = '768px';
+var mobileBreakpoint = '824px';
 var tabletBreakpoint = '992px';
 var smallMonitorBreakpoint = '1200px';
 

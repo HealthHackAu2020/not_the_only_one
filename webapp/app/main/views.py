@@ -9,11 +9,12 @@ from random import shuffle
 main = Blueprint('main', __name__)
 
 BASE="https://test.nottheonlyone.org"
+FRONT_GROUP="Impact"
 
 @main.route('/')
 def index():
     true_value = LookupValue.query.filter_by(group="bool",value="True").first()
-    front_page = Category.query.filter_by(name="Front Page").first()
+    front_page = Category.query.filter_by(name=FRONT_GROUP).first()
     if front_page is None:
         stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
         stories = stories_query.all()
@@ -26,7 +27,7 @@ def index():
     num = len(Story.query.all())
     curated = len(Story.query.filter_by(curated=true_value).all())
     for cat in story_categories:
-        if cat.name != "Front Page":
+        if cat.name != FRONT_GROUP:
             category = {}
             category['url'] = url_for("main.category", category_id=cat.id)
             category['name'] = '#' + cat.name.replace(' ', '')
@@ -74,7 +75,7 @@ def view():
     if story.categories is not None:
         if len(story.categories) > 0:
             for cat in story.categories:
-                if cat.name != "Front Page":
+                if cat.name != FRONT_GROUP:
                     category = {}
                     category['url'] = url_for("main.category", category_id=cat.id)
                     category['name'] = '#' + cat.name.replace(' ', '')
@@ -86,7 +87,7 @@ def view():
 def story(story_id):
     true_value = LookupValue.query.filter_by(group="bool",value="True").first()
     story = Story.query.filter_by(id=story_id).filter_by(visible=true_value).first()
-    front_page = Category.query.filter_by(name="Front Page").first()
+    front_page = Category.query.filter_by(name=FRONT_GROUP).first()
     if front_page is None:
         stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
         stories = stories_query.all()
@@ -99,7 +100,7 @@ def story(story_id):
     num = len(Story.query.all())
     curated = len(Story.query.filter_by(curated=true_value).all())
     for cat in story_categories:
-        if cat.name != "Front Page":
+        if cat.name != FRONT_GROUP:
             category = {}
             category['url'] = url_for("main.category", category_id=cat.id)
             category['name'] = '#' + cat.name.replace(' ', '')

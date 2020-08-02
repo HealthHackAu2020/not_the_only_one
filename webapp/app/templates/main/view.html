@@ -1,14 +1,43 @@
 <i class="close icon"></i>
-<div class="ui header">
+{# <div class="ui header">
     {{ title }}
-</div>
+</div> #}
 
 
 <div class="content">
   {{ oembed | safe }}
-  <br />
+  <br/>
   <div class="actions">
-    {% block footer %}
-    {% endblock %}
+    <div class="ui grid socialgrid">
+
+      <a target="_blank" class="four wide column" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}">
+        <div class="ui facebook button">
+          <i class="facebook icon"></i>
+        Facebook
+        </div>
+      </a>
+      
+      <a target="_blank" class="four wide column" href="https://twitter.com/home?status={{ share_url }}">
+        <div class="ui twitter button">
+          <i class="twitter icon"></i>
+          Twitter
+        </div>
+      </a>
+      
+      <a target="_blank" class="four wide column" href="https://www.linkedin.com/shareArticle?mini=true&url={{ share_url }}&title=&summary=#NotTheOnlyOne&source=">
+        <div class="ui linkedin button">
+          <i class="linkedin icon"></i>
+          LinkedIn
+        </div>
+      </a>
+      
+      <a target="_blank" class="four wide column" href="mailto:info@example.com?&cc=&bcc=&subject=#NotTheOnlyOne Project&body=I'd like to share this story with you: {{ share_url }}">
+        <div class="ui instagram button">
+          <i class="envelope icon"></i>
+          Email
+        </div>
+      </a>
+      </div>
+    </div>
   </div>
 </div>

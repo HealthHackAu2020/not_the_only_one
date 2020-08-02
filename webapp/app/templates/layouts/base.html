@@ -13,7 +13,7 @@
 
   <div id="loginDialog" class="ui tiny transition modal"></div>
   <div id="registerDialog" class="ui tiny transition modal"></div>
-  <div id="viewDialog" class="ui transition modal"></div>
+  <div id="viewDialog" class="ui small transition modal" style="max-width:440px;"></div>
   <div id="searchDialog" class="ui small transition modal"></div>
   {{ nav.render_mobile_nav(current_user) }}
   <div class="pusher">
@@ -30,18 +30,26 @@
       {# When extended, the content block contains all the html of the webpage #}
 
       {% if request.endpoint != 'main.index' %}
+      {% if request.endpoint != 'main.story' %}
+      {% if request.endpoint != 'main.search_list' %}
       <div class="ui vertical stripe segment">
         <div class="ui stackable very relaxed center aligned grid container ntoo-top">
           <div class="row">
             <div class="twelve wide column">
               {% endif %}
+              {% endif %}
+              {% endif %}
               {% block content %}
               {% endblock %}
               {% if request.endpoint != 'main.index' %}
+              {% if request.endpoint != 'main.story' %}
+              {% if request.endpoint != 'main.search_list' %}
             </div>
           </div>
         </div>
       </div>
+      {% endif %}
+      {% endif %}
       {% endif %}
 
       {# Implement CSRF protection for site #}
@@ -158,7 +166,7 @@
     event.preventDefault();
     if (view_running == true) {
       return;
-    }      
+    }
     view_running = true;
     var url = "{{ url_for('main.view',) }}" + "?id=" + $(this).data('id');
     $.get(url, function (data) {
@@ -180,6 +188,32 @@
       });
     });
   });
+</script>
+
+<script>
+{% if load_id is defined %}
+    view_running = true;
+    var url = "{{ url_for('main.view',) }}" + "?id=" + {{ load_id }};
+    $.get(url, function (data) {
+      $('#viewDialog').html(data);
+      twttr.widgets.load($('#viewDialog'));
+      $('#viewDialog').css("display", "block");
+      $('#viewDialog').css("opacity", "0");
+      $('div.ui.dimmer.modals.page.transition.hidden').css("display", "block");
+
+      twttr.events.bind('rendered',  function(event) {
+        view_running = false;
+        $('#viewDialog').css("opacity", "100");
+        $('#viewDialog').modal({
+          onHidden: function(){
+            $('#viewDialog').css("display", "hidden");
+            $('div.ui.dimmer.modals.page.transition.hidden').css("display", "hidden");
+          }
+        }).modal('show');
+      });
+    });
+{% endif %}
+  
 </script>
 
   {# site-wide story search modal handling #}

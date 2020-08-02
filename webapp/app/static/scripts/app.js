@@ -80,7 +80,12 @@ semantic.home = {};
 semantic.home.ready = function() {
 
   // if($(window).width() > 600) {
-  var is_root = location.pathname == "/";
+  var path = location.pathname;
+  var is_root = path == "/";
+  endpoint = path.substr(1);
+  if (!isNaN(endpoint)) {
+    is_root = true;
+  }
   if (is_root) {
     $('body')
       .visibility({

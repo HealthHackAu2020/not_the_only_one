@@ -6,6 +6,7 @@ from sqlalchemy import func
 
 main = Blueprint('main', __name__)
 
+BASE="https://test.nottheonlyone.org"
 
 @main.route('/')
 def index():
@@ -18,8 +19,7 @@ def index():
 @main.route('/about')
 def about():
     editable_html_obj = EditableHTML.get_editable_html('about')
-    return render_template(
-        'main/about.html', editable_html_obj=editable_html_obj)
+    return render_template('main/about.html', editable_html_obj=editable_html_obj)
 
 
 @main.route('/search/<terms>')
@@ -29,7 +29,7 @@ def search_list(terms):
     for term in terms.split():
         keyword = "%{}%".format(term)
         keyword = keyword.lower()
-        stories_query = Story.query.filter(Story.feature_set.like(keyword)).all()
+        stories_query = Story.query.filter(Story.feature_set.like(keyword)).filter_by(visible=true_value).all()
         for story in stories_query:
             if story not in hits:
                 hits.append(story)
@@ -48,8 +48,18 @@ def search():
 def view():
     id = request.args['id']
     story = Story.query.filter_by(id=id).first()
+    share_url = BASE + url_for('main.story', story_id=story.id)
     if story is None:
         return jsonify('Bad id')
-    return render_template(
-        'main/view.html', oembed=story.oembed_full, title="Story")
-    return
+    return render_template('main/view.html', oembed=story.oembed_full, share_url=share_url)
+
+
+@main.route('/<story_id>')
+def story(story_id):
+    true_value = LookupValue.query.filter_by(group="bool",value="True").first()
+    story = Story.query.filter_by(id=story_id).filter_by(visible=true_value).first()
+    stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
+    stories = stories_query.all()
+    if story is None:
+        return render_template('main/index.html', stories=stories[:18], num=len(stories))
+    return render_template('main/index.html', stories=stories[:18], num=len(stories), load_id=story.id)

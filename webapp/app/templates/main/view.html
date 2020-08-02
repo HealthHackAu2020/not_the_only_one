@@ -7,6 +7,14 @@
 <div class="content">
   {{ oembed | safe }}
   <br />
+  {% if categories|length %}
+  <div class="right floating">
+    {% for category in categories %}
+      <a class="shirou-primary" href="{{ category.url }}">{{ category.name }}</a> 
+    {% endfor%}
+  </div>
+  {% endif %}
+  <br/>
   <div class="actions">
     <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}">
       <div class="ui circular icon facebook button"><i class="facebook icon"></i></div>

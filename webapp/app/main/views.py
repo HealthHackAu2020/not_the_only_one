@@ -69,7 +69,16 @@ def view():
     share_url = BASE + url_for('main.story', story_id=story.id)
     if story is None:
         return jsonify('Bad id')
-    return render_template('main/view.html', oembed=story.oembed_full, share_url=share_url)
+    categories = []
+    if story.categories is not None:
+        if len(story.categories) > 0:
+            for cat in story.categories:
+                if cat.name != "Front Page":
+                    category = {}
+                    category['url'] = url_for("main.category", category_id=cat.id)
+                    category['name'] = '#' + cat.name.replace(' ', '')
+                    categories.append(category)
+    return render_template('main/view.html', oembed=story.oembed_full, share_url=share_url, categories=categories)
 
 
 @main.route('/<story_id>')

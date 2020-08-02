@@ -34,6 +34,7 @@ def about():
 def search_list(terms):
     hits = []
     true_value = LookupValue.query.filter_by(group="bool",value="True").first()
+    share_url = BASE + url_for("main.search_list", terms=terms)
     for term in terms.split():
         keyword = "%{}%".format(term)
         keyword = keyword.lower()
@@ -41,7 +42,7 @@ def search_list(terms):
         for story in stories_query:
             if story not in hits:
                 hits.append(story)
-    return render_template('main/list.html', stories=hits, title="Search Stories", terms=terms, hits=len(hits))
+    return render_template('main/list.html', stories=hits, title="Search Stories", terms=terms, hits=len(hits), share_url=share_url)
 
 
 @main.route('/search', methods=['GET', 'POST'])

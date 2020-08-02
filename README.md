@@ -2,42 +2,27 @@
 
 The ideal solution would have three areas: Capturing the data easily into a database, Curating the data in a crowd-sourced way using web technologies, and Sharing that data to the world in an easy to use web interface.
 
-Web app
-  Front-end: presentation, admin management
-  Back-end: text classification (category and sentiment), API, DB interactions
-  Worker: monitor Twitter, ingest tweets
+## Members
 
-Features for web app
-  Default
-    Manual entry
-    Search
-    Browse
-    Share
-    Compare
-  Admin
-    Manual curation
-    Metadata
+### Problem Owner
 
+* Rowland Mosbergen
 
-```
-python
-import nltk
-nltk.download('stopwords')
-nltk.download('punkt')
-```
+### Hackers
 
-WebApp
-  Mobile Apps
-  Search function improve UI
-  Sticky to top icon for card macro
-  Bugs/Remaining UI
-  Infinite scrolling on homepage
-  Share Modal
-  DesktopApp
+* Shurui Yi
+* Chelsea Tang
+* Thom Cuddihy
 
-API endpoint for adding
-  Use for browser plugins e.g.
-  Extend Story model to include origin
+### Special Thanks
 
-Similarity function
-  Share Story/Collection to social media
+* Andrew Saul
+* HealthHack Committee
+
+## TODO
+* Search function improve UI
+* Sticky to top icon for card macro
+* Bugs/Remaining UI
+* Infinite scrolling on homepage
+* Add favicon
+* Add logo to centre of mobile nav

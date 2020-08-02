@@ -12,9 +12,9 @@ BASE="https://test.nottheonlyone.org"
 
 @main.route('/')
 def index():
+    true_value = LookupValue.query.filter_by(group="bool",value="True").first()
     front_page = Category.query.filter_by(name="Front Page").first()
     if front_page is None:
-        true_value = LookupValue.query.filter_by(group="bool",value="True").first()
         stories_query = Story.query.filter_by(visible=true_value).order_by(func.random())
         stories = stories_query.all()
         stories = stories[:18]
@@ -24,13 +24,14 @@ def index():
     categories = []
     story_categories = Category.query.all()
     num = len(Story.query.all())
+    curated = len(Story.query.filter_by(curated=true_value).all())
     for cat in story_categories:
         if cat.name != "Front Page":
             category = {}
             category['url'] = url_for("main.category", category_id=cat.id)
             category['name'] = '#' + cat.name.replace(' ', '')
             categories.append(category)
-    return render_template('main/index.html', stories=stories, num=num, categories=categories)
+    return render_template('main/index.html', stories=stories, num=num, curated=curated, categories=categories)
 
 
 @main.route('/about')
@@ -96,6 +97,7 @@ def story(story_id):
     categories = []
     story_categories = Category.query.all()
     num = len(Story.query.all())
+    curated = len(Story.query.filter_by(curated=true_value).all())
     for cat in story_categories:
         if cat.name != "Front Page":
             category = {}
@@ -103,8 +105,8 @@ def story(story_id):
             category['name'] = '#' + cat.name.replace(' ', '')
             categories.append(category)
     if story is None:
-        return render_template('main/index.html', stories=stories, num=len(stories), categories=categories)
-    return render_template('main/index.html', stories=stories, num=num, load_id=story.id, categories=categories)
+        return render_template('main/index.html', stories=stories, num=num, curated=curated, categories=categories)
+    return render_template('main/index.html', stories=stories, num=num, curated=curated, load_id=story.id, categories=categories)
 
 
 @main.route('/category/<category_id>')
